@@ -3,6 +3,7 @@
 import { Heart, ShoppingBag, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
+import { useHydrated } from "@/hooks/use-hydrated";
 import { EmptyState } from "@/components/common/empty-state";
 import { ProductGrid } from "@/components/product/product-grid";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,7 @@ import { useWishlist } from "@/store/wishlist";
 /** Saved items page with a bulk "add all" action. */
 export function WishlistView() {
   const slugs = useWishlist((s) => s.slugs);
-  const hydrated = useWishlist((s) => s.hydrated);
+  const hydrated = useHydrated(useWishlist);
   const clear = useWishlist((s) => s.clear);
   const addItem = useCart((s) => s.addItem);
   const openCart = useUI((s) => s.openCart);

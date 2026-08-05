@@ -16,8 +16,6 @@ interface CartState {
   items: CartItem[];
   /** Applied coupon code, carried from the cart through to checkout. */
   couponCode: string | null;
-  /** False until persisted state has been read from localStorage. */
-  hydrated: boolean;
   addItem: (item: CartItem) => void;
   removeItem: (item: Omit<CartItem, "quantity">) => void;
   setQuantity: (item: Omit<CartItem, "quantity">, quantity: number) => void;
@@ -34,7 +32,6 @@ export const useCart = create<CartState>()(
     (set, get) => ({
       items: [],
       couponCode: null,
-      hydrated: false,
 
       addItem: (item) =>
         set((state) => {
@@ -80,10 +77,6 @@ export const useCart = create<CartState>()(
         items: state.items,
         couponCode: state.couponCode,
       }),
-      onRehydrateStorage: () => () => {
-        // Flip the flag so the UI can safely render persisted counts.
-        useCart.setState({ hydrated: true });
-      },
     },
   ),
 );

@@ -6,7 +6,6 @@ import { persist } from "zustand/middleware";
 interface WishlistState {
   /** Product slugs, most recently saved first. */
   slugs: string[];
-  hydrated: boolean;
   toggle: (slug: string) => void;
   remove: (slug: string) => void;
   clear: () => void;
@@ -17,7 +16,6 @@ export const useWishlist = create<WishlistState>()(
   persist(
     (set, get) => ({
       slugs: [],
-      hydrated: false,
 
       toggle: (slug) =>
         set((state) => ({
@@ -36,9 +34,6 @@ export const useWishlist = create<WishlistState>()(
     {
       name: "abedin-shop-wishlist",
       partialize: (state) => ({ slugs: state.slugs }),
-      onRehydrateStorage: () => () => {
-        useWishlist.setState({ hydrated: true });
-      },
     },
   ),
 );

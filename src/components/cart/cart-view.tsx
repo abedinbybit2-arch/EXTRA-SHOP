@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
 
+import { useHydrated } from "@/hooks/use-hydrated";
 import { EmptyState } from "@/components/common/empty-state";
 import { Price } from "@/components/common/price";
 import { Button } from "@/components/ui/button";
@@ -27,7 +28,7 @@ import { OrderSummary } from "./order-summary";
 /** Full shopping bag page. */
 export function CartView() {
   const items = useCart((s) => s.items);
-  const hydrated = useCart((s) => s.hydrated);
+  const hydrated = useHydrated(useCart);
   const couponCode = useCart((s) => s.couponCode);
   const setQuantity = useCart((s) => s.setQuantity);
   const removeItem = useCart((s) => s.removeItem);

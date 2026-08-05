@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
 
+import { useHydrated } from "@/hooks/use-hydrated";
 import { Price } from "@/components/common/price";
 import { Badge } from "@/components/ui/badge";
 import { Rating } from "@/components/ui/rating";
@@ -34,9 +35,9 @@ export function ProductCard({
   const openCart = useUI((s) => s.openCart);
   const openQuickView = useUI((s) => s.openQuickView);
 
-  const wishlisted = useWishlist(
-    (s) => s.hydrated && s.slugs.includes(product.slug),
-  );
+  const wishlistHydrated = useHydrated(useWishlist);
+  const saved = useWishlist((s) => s.slugs.includes(product.slug));
+  const wishlisted = wishlistHydrated && saved;
   const toggleWishlist = useWishlist((s) => s.toggle);
 
   const status = stockStatus(product);

@@ -16,6 +16,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
 
+import { useHydrated } from "@/hooks/use-hydrated";
 import { OrderSummary } from "@/components/cart/order-summary";
 import { EmptyState } from "@/components/common/empty-state";
 import { Button } from "@/components/ui/button";
@@ -107,7 +108,7 @@ function makeOrderReference() {
 /** Four-step checkout. Entirely UI — nothing is transmitted anywhere. */
 export function CheckoutView() {
   const items = useCart((s) => s.items);
-  const hydrated = useCart((s) => s.hydrated);
+  const hydrated = useHydrated(useCart);
   const couponCode = useCart((s) => s.couponCode);
   const clear = useCart((s) => s.clear);
   const sessionUid = useSession((s) => s.uid);

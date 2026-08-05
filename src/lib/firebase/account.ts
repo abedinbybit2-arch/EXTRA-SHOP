@@ -130,6 +130,20 @@ export function watchAccount(
   );
 }
 
+/**
+ * Firestore rejects `undefined` outright, and a product with no size options
+ * yields `size: undefined` on its cart line. Omit the optional variant fields
+ * rather than sending them empty.
+ */
+function sanitiseCart(cart: CartItem[]) {
+  return cart.map((item) => ({
+    productId: item.productId,
+    quantity: item.quantity,
+    ...(item.color ? { color: item.color } : {}),
+    ...(item.size ? { size: item.size } : {}),
+  }));
+}
+
 /** Persist the whole cart. Called on every cart mutation. */
 export async function saveCart(
   kind: AccountKind,
@@ -140,7 +154,11 @@ export async function saveCart(
   if (!ref) return;
   await setDoc(
     ref,
-    { cart, updatedAt: new Date().toISOString(), updatedAtServer: serverTimestamp() },
+    {
+      cart: sanitiseCart(cart),
+      updatedAt: new Date().toISOString(),
+      updatedAtServer: serverTimestamp(),
+    },
     { merge: true },
   );
 }

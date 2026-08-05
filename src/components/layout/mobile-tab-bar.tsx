@@ -4,6 +4,7 @@ import { Heart, Home, Search, ShoppingBag, Store } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { useHydrated } from "@/hooks/use-hydrated";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/store/cart";
 import { useUI } from "@/store/ui";
@@ -15,9 +16,9 @@ export function MobileTabBar() {
   const { openCart, setSearchOpen } = useUI();
 
   const cartItems = useCart((s) => s.items);
-  const cartHydrated = useCart((s) => s.hydrated);
+  const cartHydrated = useHydrated(useCart);
   const wishlistSlugs = useWishlist((s) => s.slugs);
-  const wishlistHydrated = useWishlist((s) => s.hydrated);
+  const wishlistHydrated = useHydrated(useWishlist);
 
   const cartCount = cartHydrated
     ? cartItems.reduce((sum, line) => sum + line.quantity, 0)

@@ -4,6 +4,7 @@ import { ArrowRight, ShoppingBag, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useHydrated } from "@/hooks/use-hydrated";
 import { Button } from "@/components/ui/button";
 import { QuantityStepper } from "@/components/ui/quantity-stepper";
 import {
@@ -27,7 +28,7 @@ import { useUI } from "@/store/ui";
 export function CartDrawer() {
   const { cartOpen, setCartOpen } = useUI();
   const items = useCart((s) => s.items);
-  const hydrated = useCart((s) => s.hydrated);
+  const hydrated = useHydrated(useCart);
   const setQuantity = useCart((s) => s.setQuantity);
   const removeItem = useCart((s) => s.removeItem);
 

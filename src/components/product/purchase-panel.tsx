@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
+import { useHydrated } from "@/hooks/use-hydrated";
 import { Price } from "@/components/common/price";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,9 +35,9 @@ export function PurchasePanel({ product }: { product: Product }) {
   const addItem = useCart((s) => s.addItem);
   const openCart = useUI((s) => s.openCart);
   const toggleWishlist = useWishlist((s) => s.toggle);
-  const wishlisted = useWishlist(
-    (s) => s.hydrated && s.slugs.includes(product.slug),
-  );
+  const wishlistHydrated = useHydrated(useWishlist);
+  const saved = useWishlist((s) => s.slugs.includes(product.slug));
+  const wishlisted = wishlistHydrated && saved;
 
   const [color, setColor] = useState(product.colors[0]?.name);
   const [size, setSize] = useState(product.sizes?.[0]);

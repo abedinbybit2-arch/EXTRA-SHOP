@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 
+import { useHydrated } from "@/hooks/use-hydrated";
 import { ProductSection } from "@/components/product/product-section";
 import { getProducts } from "@/lib/catalog";
 import { useRecentlyViewed } from "@/store/recently-viewed";
@@ -13,7 +14,7 @@ import { useRecentlyViewed } from "@/store/recently-viewed";
  */
 export function RecentlyViewed({ currentSlug }: { currentSlug?: string }) {
   const slugs = useRecentlyViewed((s) => s.slugs);
-  const hydrated = useRecentlyViewed((s) => s.hydrated);
+  const hydrated = useHydrated(useRecentlyViewed);
   const record = useRecentlyViewed((s) => s.record);
 
   useEffect(() => {
