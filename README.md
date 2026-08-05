@@ -6,7 +6,7 @@
 
 A premium, frontend-only e-commerce storefront built with Next.js 16, React 19, TypeScript and Tailwind CSS v4.
 
-[**Live on Vercel →**](https://extra-shop-omega.vercel.app/) &nbsp;·&nbsp; [**Live on GitHub Pages →**](https://abedinbybit2-arch.github.io/EXTRA-SHOP/)
+[**abedin.shop →**](https://abedin.shop/)
 
 </div>
 
@@ -146,13 +146,27 @@ extra-shop/
 
 The same source deploys to two hosts, which differ only in configuration:
 
-| | GitHub Pages | Vercel |
+| | Vercel — production | GitHub Pages — mirror |
 |---|---|---|
-| URL | [abedinbybit2-arch.github.io/EXTRA-SHOP](https://abedinbybit2-arch.github.io/EXTRA-SHOP/) | [extra-shop-omega.vercel.app](https://extra-shop-omega.vercel.app/) |
-| Served from | project subpath | domain root |
-| `NEXT_PUBLIC_BASE_PATH` | `/EXTRA-SHOP` | *(unset)* |
-| `NEXT_PUBLIC_SITE_URL` | the Pages URL | the Vercel URL |
-| Trigger | `.github/workflows/deploy.yml` on push to `main` | `vercel --prod` |
+| URL | **[abedin.shop](https://abedin.shop/)** | [abedinbybit2-arch.github.io/EXTRA-SHOP](https://abedinbybit2-arch.github.io/EXTRA-SHOP/) |
+| Served from | domain root | project subpath |
+| `NEXT_PUBLIC_BASE_PATH` | *(unset)* | `/EXTRA-SHOP` |
+| `NEXT_PUBLIC_SITE_URL` | `https://abedin.shop` | the Pages URL |
+| Trigger | `vercel --prod` | `.github/workflows/deploy.yml` on push to `main` |
+
+### Custom domain
+
+`abedin.shop` is registered at Hostinger, with DNS still managed there rather
+than delegated to Vercel:
+
+| Record | Name | Value |
+|---|---|---|
+| `A` | `@` | `76.76.21.21` |
+| `CNAME` | `www` | `cname.vercel-dns.com.` |
+
+`www.abedin.shop` is configured in Vercel to issue a permanent (308) redirect to
+the apex, so the site has exactly one canonical hostname. TLS is provisioned
+automatically by Vercel through Let's Encrypt.
 
 ### Environment variables
 
