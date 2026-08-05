@@ -105,6 +105,16 @@ function makeOrderReference() {
   return `AS-${Math.floor(100000 + Math.random() * 899999)}`;
 }
 
+/**
+ * The checkout deliberately has no header band, but the page still needs a
+ * single top-level heading for assistive tech and search engines. The order
+ * confirmation carries its own visible h1, so this only covers the other
+ * states.
+ */
+function CheckoutHeading() {
+  return <h1 className="sr-only">Checkout</h1>;
+}
+
 /** Four-step checkout. Entirely UI — nothing is transmitted anywhere. */
 export function CheckoutView() {
   const items = useCart((s) => s.items);
@@ -125,6 +135,7 @@ export function CheckoutView() {
   if (!hydrated) {
     return (
       <div className="container-luxe grid gap-10 py-12 lg:grid-cols-[1fr_380px]">
+        <CheckoutHeading />
         <Skeleton className="h-[480px] w-full rounded-2xl" />
         <Skeleton className="h-80 w-full rounded-2xl" />
       </div>
@@ -135,6 +146,7 @@ export function CheckoutView() {
   if (lines.length === 0) {
     return (
       <div className="container-luxe py-12">
+        <CheckoutHeading />
         <EmptyState
           icon={ShoppingBag}
           title="There's nothing to check out"
@@ -257,6 +269,8 @@ export function CheckoutView() {
 
   return (
     <div className="container-luxe py-12 lg:py-16">
+      <CheckoutHeading />
+
       {/* Step indicator */}
       <ol className="mb-12 flex flex-wrap items-center gap-x-3 gap-y-2">
         {STEPS.map((label, index) => (

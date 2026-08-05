@@ -35,7 +35,8 @@ export function Footer() {
               {siteConfig.description}
             </p>
 
-            <form onSubmit={subscribe} className="mt-8">
+            {/* noValidate so our own message runs instead of the native bubble. */}
+            <form onSubmit={subscribe} noValidate className="mt-8">
               <label
                 htmlFor="footer-email"
                 className="mb-2.5 block text-[11px] uppercase tracking-[0.18em] text-muted-foreground"

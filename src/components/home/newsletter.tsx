@@ -49,6 +49,9 @@ export function Newsletter() {
 
         <form
           onSubmit={submit}
+          // Without this the browser's native bubble blocks submit and our own
+          // styled message never runs — the contact form already opts out.
+          noValidate
           className="mx-auto mt-9 flex max-w-md flex-col gap-3 sm:flex-row"
         >
           <label htmlFor="newsletter-email" className="sr-only">
