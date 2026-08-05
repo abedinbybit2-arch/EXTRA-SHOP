@@ -1,10 +1,22 @@
+/**
+ * Canonical origin for metadata, Open Graph tags, sitemap and robots.
+ *
+ * The same build is deployed to more than one host, so this is injected rather
+ * than hardcoded — otherwise canonical URLs on one deployment point at the
+ * other. Falls back to the GitHub Pages URL, which is the default target.
+ */
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://abedinbybit2-arch.github.io/EXTRA-SHOP"
+).replace(/\/+$/, "");
+
 /** Single source of truth for brand copy, contact details and navigation. */
 export const siteConfig = {
   name: "EXTRA SHOP",
   tagline: "Objects of lasting desire",
   description:
     "EXTRA SHOP is a curated destination for modern luxury — watches, fragrance, leather goods, eyewear, audio and fine jewellery from the world's most considered makers.",
-  url: "https://abedinbybit2-arch.github.io/EXTRA-SHOP",
+  url: siteUrl,
   locale: "en_US",
   contact: {
     email: "concierge@extrashop.com",
