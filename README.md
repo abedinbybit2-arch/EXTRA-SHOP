@@ -179,10 +179,53 @@ automatically by Vercel through Let's Encrypt.
 |---|---|
 | `NEXT_PUBLIC_BASE_PATH` | Path prefix when served from a subdirectory. Leave unset for a domain root. |
 | `NEXT_PUBLIC_SITE_URL` | Canonical origin for `metadataBase`, Open Graph tags, `sitemap.xml` and `robots.txt`. Set to `https://abedin.shop` in production. |
+| `NEXT_PUBLIC_FIREBASE_*` | Firebase web config — see `.env.example`. Omit them and the storefront runs exactly as before on `localStorage` alone, with the account features hidden. |
 
-Both are read at **build time**, so changing either requires a rebuild.
+All are read at **build time**, so changing any of them requires a rebuild.
 
 To deploy anywhere else, run `npm run build` and serve the resulting `out/` directory from any static host (Netlify, Cloudflare Pages, S3, nginx).
+
+---
+
+## Accounts and data (Firebase)
+
+The storefront itself is still static and backendless. Accounts are the one
+exception: they run on Firebase **Authentication** and **Cloud Firestore** only,
+on the free Spark plan.
+
+### How sessions work
+
+| | Guest | Registered |
+|---|---|---|
+| Identity | Firebase anonymous uid | Firebase uid from email + password |
+| Document | `guests/{guestId}` | `users/{uid}` |
+| Orders | `guests/{guestId}/orders/{ref}` | `users/{uid}/orders/{ref}` |
+| Survives restart | yes, until site data is cleared | yes, across devices |
+
+Guests are signed in **anonymously** rather than given a client-generated id.
+That is a security decision, not a convenience one: a purely local id would
+force the `guests` collection to be world-readable and world-writable for the
+feature to function, letting anyone read or edit another visitor's cart and
+orders. With an anonymous uid, rules reduce to `request.auth.uid == guestId`.
+
+### Rules
+
+`firestore.rules` denies everything by default. A document is reachable only by
+the uid that owns it, orders are create-only so a placed order can never be
+altered, and carts are validated as a bounded list. Deploy them with:
+
+```bash
+npx firebase-tools deploy --only firestore:rules
+```
+
+### First-time project setup
+
+Everything except one step can be scripted. In the Firebase console, open
+**Authentication → Get started** and enable **Email/Password** and
+**Anonymous** — on the Spark plan this cannot be done through the API, because
+the programmatic route (`identityPlatform:initializeAuth`) requires billing.
+Then add your production hostname under **Authentication → Settings →
+Authorized domains**.
 
 ---
 
