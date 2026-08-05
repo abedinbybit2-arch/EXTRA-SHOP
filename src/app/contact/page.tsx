@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail } from "lucide-react";
 import Image from "next/image";
 
 import { PageHeader } from "@/components/common/page-header";
@@ -13,11 +13,15 @@ export const metadata: Metadata = {
     "Reach the ABEDIN SHOP concierge team by email, phone or message — replies within a few hours.",
 };
 
+/** Email is the only channel we publish — there is no phone or postal address. */
 const DETAILS = [
-  { icon: MapPin, label: "Showroom", value: siteConfig.contact.address },
-  { icon: Phone, label: "Telephone", value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phone.replace(/[^+\d]/g, "")}` },
-  { icon: Mail, label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
-  { icon: Clock, label: "Opening hours", value: siteConfig.contact.hours },
+  {
+    icon: Mail,
+    label: "Email",
+    value: siteConfig.contact.email,
+    href: `mailto:${siteConfig.contact.email}`,
+  },
+  { icon: Clock, label: "Response hours", value: siteConfig.contact.hours },
 ];
 
 export default function ContactPage() {
@@ -26,7 +30,7 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Concierge"
         title="Talk to a person"
-        description="No ticket queues and no chatbots. Messages reach the same small team that handles the showroom floor."
+        description="No ticket queues and no chatbots. Messages reach the same small team that curates the catalogue."
         crumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
       />
 
@@ -39,12 +43,12 @@ export default function ContactPage() {
           </div>
 
           <aside className="space-y-6">
-            {/* Showroom card */}
+            {/* No physical location is published, so this stays editorial. */}
             <div className="overflow-hidden rounded-2xl border border-border bg-card">
               <div className="relative aspect-4/3">
                 <Image
                   src={photoWide(IMAGES.living[0], 800, 600)}
-                  alt="The ABEDIN SHOP showroom in SoHo, New York"
+                  alt=""
                   fill
                   sizes="380px"
                   className="object-cover"
@@ -52,10 +56,10 @@ export default function ContactPage() {
                 <span className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <span className="absolute inset-x-0 bottom-0 p-5 text-white">
                   <span className="block font-display text-xl font-light">
-                    The SoHo showroom
+                    A small team
                   </span>
                   <span className="mt-1 block text-xs text-white/75">
-                    Appointments recommended at weekends
+                    Every message is read by someone who knows the catalogue
                   </span>
                 </span>
               </div>

@@ -17,18 +17,11 @@ export const siteConfig = {
     "ABEDIN SHOP is a curated destination for modern luxury — watches, fragrance, leather goods, eyewear, audio and fine jewellery from the world's most considered makers.",
   url: siteUrl,
   locale: "en_US",
+  /** Email is the only contact channel offered — no postal address or phone. */
   contact: {
-    email: "concierge@abedin.shop",
-    phone: "+1 (212) 555-0139",
-    address: "18 Mercer Street, SoHo, New York, NY 10013",
+    email: "abedin.shop@gmail.com",
     hours: "Mon – Sat, 9:00 – 20:00 EST",
   },
-  social: [
-    { label: "Instagram", href: "https://instagram.com" },
-    { label: "Pinterest", href: "https://pinterest.com" },
-    { label: "YouTube", href: "https://youtube.com" },
-    { label: "LinkedIn", href: "https://linkedin.com" },
-  ],
 } as const;
 
 /** Primary header navigation. */

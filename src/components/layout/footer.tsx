@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -8,8 +8,6 @@ import { toast } from "sonner";
 import { Logo } from "@/components/brand/logo";
 import { Input } from "@/components/ui/input";
 import { footerNav, siteConfig } from "@/lib/site";
-
-const PAYMENT_METHODS = ["Visa", "Mastercard", "Amex", "PayPal", "Apple Pay"];
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -96,19 +94,6 @@ export function Footer() {
               </h3>
               <ul className="space-y-3.5 text-sm text-muted-foreground">
                 <li className="flex gap-2.5">
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
-                  <span>{siteConfig.contact.address}</span>
-                </li>
-                <li className="flex gap-2.5">
-                  <Phone className="mt-0.5 size-4 shrink-0 text-accent" />
-                  <a
-                    href={`tel:${siteConfig.contact.phone.replace(/[^+\d]/g, "")}`}
-                    className="transition-colors hover:text-accent"
-                  >
-                    {siteConfig.contact.phone}
-                  </a>
-                </li>
-                <li className="flex gap-2.5">
                   <Mail className="mt-0.5 size-4 shrink-0 text-accent" />
                   <a
                     href={`mailto:${siteConfig.contact.email}`}
@@ -123,39 +108,11 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col gap-6 border-t border-border pt-8 md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 border-t border-border pt-8">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} {siteConfig.name}. A frontend
             demonstration project — no real transactions are processed.
           </p>
-
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            <ul className="flex items-center gap-4">
-              {siteConfig.social.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-muted-foreground transition-colors hover:text-accent"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <ul className="flex items-center gap-2" aria-label="Accepted payment methods">
-              {PAYMENT_METHODS.map((method) => (
-                <li
-                  key={method}
-                  className="rounded-md border border-border px-2 py-1 text-[9px] uppercase tracking-wider text-muted-foreground"
-                >
-                  {method}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
     </footer>

@@ -65,9 +65,8 @@ const DELIVERY_OPTIONS = [
 ];
 
 const PAYMENT_OPTIONS = [
-  { id: "card", icon: CreditCard, label: "Credit or debit card", body: "Visa, Mastercard, American Express" },
-  { id: "wallet", icon: Wallet, label: "Apple Pay / Google Pay", body: "Authorise with Face ID or fingerprint" },
-  { id: "paypal", icon: ShoppingBag, label: "PayPal", body: "You'll be redirected to approve the payment" },
+  { id: "card", icon: CreditCard, label: "Credit or debit card", body: "All major cards accepted" },
+  { id: "wallet", icon: Wallet, label: "Digital wallet", body: "Authorise with Face ID or fingerprint" },
   { id: "transfer", icon: Building2, label: "Bank transfer", body: "For orders above $5,000" },
 ];
 

@@ -67,7 +67,7 @@ const sections: LegalSection[] = [
     id: "contact",
     title: "Contacting us",
     paragraphs: [
-      "Privacy questions and rights requests can be sent to concierge@abedin.shop, or by post to 18 Mercer Street, SoHo, New York, NY 10013. We aim to reply within two working days.",
+      "Privacy questions and rights requests can be sent to abedin.shop@gmail.com, which is the only contact channel we operate. We aim to reply within two working days.",
     ],
   },
 ];

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
 import { PageHeader } from "@/components/common/page-header";
@@ -94,15 +94,6 @@ export default function FaqPage() {
                     className="break-all text-muted-foreground transition-colors hover:text-accent"
                   >
                     {siteConfig.contact.email}
-                  </a>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Phone className="size-4 shrink-0 text-accent" />
-                  <a
-                    href={`tel:${siteConfig.contact.phone.replace(/[^+\d]/g, "")}`}
-                    className="text-muted-foreground transition-colors hover:text-accent"
-                  >
-                    {siteConfig.contact.phone}
                   </a>
                 </li>
               </ul>

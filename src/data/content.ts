@@ -166,7 +166,7 @@ export const faqs = [
     items: [
       {
         q: "What payment methods do you accept?",
-        a: "All major cards, Apple Pay, Google Pay, PayPal, and bank transfer for orders above $5,000. Instalment plans over three, six or twelve months are available at checkout with no interest.",
+        a: "All major credit and debit cards, digital wallets, and bank transfer for orders above $5,000. Instalment plans over three, six or twelve months are available at checkout with no interest.",
       },
       {
         q: "Is my payment information secure?",
