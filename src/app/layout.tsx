@@ -6,6 +6,9 @@ import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { MobileTabBar } from "@/components/layout/mobile-tab-bar";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { AccountPanel } from "@/components/account/account-panel";
+import { AuthDialog } from "@/components/account/auth-dialog";
+import { SessionProvider } from "@/components/account/session-provider";
 import { QuickViewDialog } from "@/components/product/quick-view-dialog";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
@@ -106,6 +109,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <QuickViewDialog />
           <BackToTop />
           <ToastProvider />
+          {/* Account layer: guest session, auth dialogs and the profile panel. */}
+          <SessionProvider />
+          <AuthDialog />
+          <AccountPanel />
         </ThemeProvider>
       </body>
     </html>

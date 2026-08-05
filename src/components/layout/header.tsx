@@ -7,6 +7,7 @@ import { Heart, Menu, Search, ShoppingBag } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Logo } from "@/components/brand/logo";
+import { ProfileMenu } from "@/components/account/profile-menu";
 import { AnnouncementBar } from "./announcement-bar";
 import { MegaMenuPanel, type MegaMenuKey } from "./mega-menu";
 import { MobileMenu } from "./mobile-menu";
@@ -172,6 +173,8 @@ export function Header() {
                 <ShoppingBag className="size-[18px]" />
                 {cartCount > 0 && <CountBadge value={cartCount} />}
               </button>
+
+              <ProfileMenu />
             </div>
           </div>
 

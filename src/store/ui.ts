@@ -13,6 +13,10 @@ interface UIState {
   filtersOpen: boolean;
   /** Slug of the product shown in the quick-view modal, or null. */
   quickViewSlug: string | null;
+  /** Which account dialog is open, if any. */
+  authDialog: "login" | "register" | null;
+  /** Whether the account panel (profile, orders, saved cart) is open. */
+  accountPanelOpen: boolean;
 
   openCart: () => void;
   closeCart: () => void;
@@ -24,6 +28,9 @@ interface UIState {
 
   openQuickView: (slug: string) => void;
   closeQuickView: () => void;
+
+  setAuthDialog: (mode: "login" | "register" | null) => void;
+  setAccountPanelOpen: (open: boolean) => void;
 }
 
 export const useUI = create<UIState>()((set) => ({
@@ -32,6 +39,8 @@ export const useUI = create<UIState>()((set) => ({
   mobileMenuOpen: false,
   filtersOpen: false,
   quickViewSlug: null,
+  authDialog: null,
+  accountPanelOpen: false,
 
   openCart: () => set({ cartOpen: true }),
   closeCart: () => set({ cartOpen: false }),
@@ -43,4 +52,7 @@ export const useUI = create<UIState>()((set) => ({
 
   openQuickView: (slug) => set({ quickViewSlug: slug }),
   closeQuickView: () => set({ quickViewSlug: null }),
+
+  setAuthDialog: (authDialog) => set({ authDialog }),
+  setAccountPanelOpen: (accountPanelOpen) => set({ accountPanelOpen }),
 }));

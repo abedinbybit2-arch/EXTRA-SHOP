@@ -22,6 +22,8 @@ interface CartState {
   removeItem: (item: Omit<CartItem, "quantity">) => void;
   setQuantity: (item: Omit<CartItem, "quantity">, quantity: number) => void;
   setCoupon: (code: string | null) => void;
+  /** Replace the whole cart, used when restoring a cart from Firestore. */
+  replaceAll: (items: CartItem[]) => void;
   clear: () => void;
   /** Total units across every line. */
   count: () => number;
@@ -65,6 +67,8 @@ export const useCart = create<CartState>()(
         })),
 
       setCoupon: (couponCode) => set({ couponCode }),
+
+      replaceAll: (items) => set({ items }),
 
       clear: () => set({ items: [], couponCode: null }),
 

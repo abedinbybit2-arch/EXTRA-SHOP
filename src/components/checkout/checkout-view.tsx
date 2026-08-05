@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { OrderSummary } from "@/components/cart/order-summary";
 import { EmptyState } from "@/components/common/empty-state";
@@ -30,8 +31,11 @@ import {
   resolveLines,
   type CartTotals,
 } from "@/lib/cart-totals";
+import { addOrder } from "@/lib/firebase/account";
+import type { OrderRecord } from "@/lib/firebase/schema";
 import { cn, formatPrice } from "@/lib/utils";
 import { useCart } from "@/store/cart";
+import { useSession } from "@/store/session";
 
 import { OrderConfirmation, type ConfirmedOrder } from "./order-confirmation";
 
@@ -116,6 +120,8 @@ export function CheckoutView() {
   const hydrated = useCart((s) => s.hydrated);
   const couponCode = useCart((s) => s.couponCode);
   const clear = useCart((s) => s.clear);
+  const sessionUid = useSession((s) => s.uid);
+  const sessionKind = useSession((s) => s.kind);
 
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
@@ -205,27 +211,72 @@ export function CheckoutView() {
   };
 
   const placeOrder = () => {
+    const reference = makeOrderReference();
+    const address = [
+      `${form.firstName} ${form.lastName}`,
+      form.address,
+      form.apartment,
+      `${form.city} ${form.postcode}`,
+      form.country,
+    ]
+      .filter(Boolean)
+      .join(", ");
+    const paymentLabel =
+      payment === "card"
+        ? `Card ending ${form.cardNumber.replace(/\s/g, "").slice(-4) || "••••"}`
+        : (PAYMENT_OPTIONS.find((o) => o.id === payment)?.label ?? "Card");
+
     setOrder({
-      reference: makeOrderReference(),
+      reference,
       email: form.email,
-      address: [
-        `${form.firstName} ${form.lastName}`,
-        form.address,
-        form.apartment,
-        `${form.city} ${form.postcode}`,
-        form.country,
-      ]
-        .filter(Boolean)
-        .join(", "),
+      address,
       deliveryLabel: deliveryOption.label,
       deliveryEta: deliveryOption.eta,
-      paymentLabel:
-        payment === "card"
-          ? `Card ending ${form.cardNumber.replace(/\s/g, "").slice(-4) || "••••"}`
-          : (PAYMENT_OPTIONS.find((o) => o.id === payment)?.label ?? "Card"),
+      paymentLabel,
       lines,
       totals,
     });
+
+    // Persist to Firestore under the current session — guest or registered —
+    // so the order survives a refresh and reappears in My Orders. Failure here
+    // must never block the confirmation the shopper already sees.
+    if (sessionUid) {
+      const record: OrderRecord = {
+        id: reference,
+        reference,
+        placedAt: new Date().toISOString(),
+        email: form.email,
+        address,
+        deliveryLabel: deliveryOption.label,
+        deliveryEta: deliveryOption.eta,
+        paymentLabel,
+        lines: lines.map((line) => ({
+          productId: line.productId,
+          name: line.product.name,
+          image: line.product.images[0],
+          quantity: line.quantity,
+          unitPrice: line.product.price,
+          lineTotal: line.lineTotal,
+          ...(line.color ? { color: line.color } : {}),
+          ...(line.size ? { size: line.size } : {}),
+        })),
+        totals: {
+          subtotal: totals.subtotal,
+          discount: totals.discount,
+          shipping: totals.shipping,
+          tax: totals.tax,
+          total: totals.total,
+          itemCount: totals.itemCount,
+        },
+      };
+
+      void addOrder(sessionKind, sessionUid, record).catch(() => {
+        toast.error("Order saved locally", {
+          description: "We couldn't reach the server to store it just now.",
+        });
+      });
+    }
+
     clear();
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

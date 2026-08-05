@@ -1,0 +1,60 @@
+rules_version = '2';
+
+// ABEDIN SHOP — Firestore security rules
+//
+// Every document belongs to exactly one signed-in identity, and that identity
+// is the document id. Guests are signed in anonymously, so a guest's uid is
+// their Guest ID; registered users are signed in with email and password.
+//
+// This is what keeps guest data private: without an auth requirement the guest
+// collection would have to be world-writable, and anyone could read or edit
+// another visitor's cart and orders.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // True when the caller is signed in as the owner of this document path.
+    function isOwner(ownerId) {
+      return request.auth != null && request.auth.uid == ownerId;
+    }
+
+    // A cart must stay a list, and is capped so a client cannot write an
+    // unbounded document.
+    function cartIsValid() {
+      return !('cart' in request.resource.data)
+        || (request.resource.data.cart is list
+            && request.resource.data.cart.size() <= 100);
+    }
+
+    // Guest sessions — anonymous uid keyed.
+    match /guests/{guestId} {
+      allow read: if isOwner(guestId);
+      allow create, update: if isOwner(guestId) && cartIsValid();
+      allow delete: if false;
+
+      match /orders/{orderId} {
+        allow read: if isOwner(guestId);
+        allow create: if isOwner(guestId);
+        // Orders are an immutable record once placed.
+        allow update, delete: if false;
+      }
+    }
+
+    // Registered accounts — Firebase Auth uid keyed.
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create, update: if isOwner(userId) && cartIsValid();
+      allow delete: if false;
+
+      match /orders/{orderId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId);
+        allow update, delete: if false;
+      }
+    }
+
+    // Nothing else in the database is reachable from a client.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
