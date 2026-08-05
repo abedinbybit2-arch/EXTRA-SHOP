@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 /**
- * The EXTRA SHOP mark: a gold lozenge bisected by a vertical rule, paired with
+ * The ABEDIN SHOP mark: a gold lozenge bisected by a vertical rule, paired with
  * a wide-tracked serif wordmark.
  */
 export function LogoMark({ className }: { className?: string }) {
@@ -41,7 +41,7 @@ export function Logo({ className, markOnly = false, href = "/" }: LogoProps) {
   return (
     <Link
       href={href}
-      aria-label="EXTRA SHOP — home"
+      aria-label="ABEDIN SHOP — home"
       className={cn(
         "group inline-flex items-center gap-2.5 text-foreground transition-opacity hover:opacity-80",
         className,
@@ -49,9 +49,13 @@ export function Logo({ className, markOnly = false, href = "/" }: LogoProps) {
     >
       <LogoMark className="size-7 text-accent transition-transform duration-500 ease-luxe group-hover:rotate-90" />
       {!markOnly && (
-        <span className="font-display text-lg font-medium uppercase leading-none tracking-[0.28em]">
-          Extra
-          <span className="ml-[0.28em] font-light text-accent">Shop</span>
+        /*
+         * Tracking is a touch tighter than the old five-letter wordmark so the
+         * longer name still clears the icons in a narrow mobile header.
+         */
+        <span className="font-display text-lg font-medium uppercase leading-none tracking-[0.2em] sm:tracking-[0.24em]">
+          Abedin
+          <span className="ml-[0.24em] font-light text-accent">Shop</span>
         </span>
       )}
     </Link>

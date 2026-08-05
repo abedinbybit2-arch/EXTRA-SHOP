@@ -71,7 +71,7 @@ export const useCart = create<CartState>()(
       count: () => get().items.reduce((sum, line) => sum + line.quantity, 0),
     }),
     {
-      name: "extra-shop-cart",
+      name: "abedin-shop-cart",
       partialize: (state) => ({
         items: state.items,
         couponCode: state.couponCode,

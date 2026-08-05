@@ -149,7 +149,7 @@ export const faqs = [
     items: [
       {
         q: "Are your products authentic?",
-        a: "Every piece is produced by the house named on the listing and ships with its documentation. EXTRA SHOP works directly with each atelier — there are no third-party resellers anywhere in our supply chain.",
+        a: "Every piece is produced by the house named on the listing and ships with its documentation. ABEDIN SHOP works directly with each atelier — there are no third-party resellers anywhere in our supply chain.",
       },
       {
         q: "Do you offer repairs?",

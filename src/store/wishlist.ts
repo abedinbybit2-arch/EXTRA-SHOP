@@ -34,7 +34,7 @@ export const useWishlist = create<WishlistState>()(
       has: (slug) => get().slugs.includes(slug),
     }),
     {
-      name: "extra-shop-wishlist",
+      name: "abedin-shop-wishlist",
       partialize: (state) => ({ slugs: state.slugs }),
       onRehydrateStorage: () => () => {
         useWishlist.setState({ hydrated: true });

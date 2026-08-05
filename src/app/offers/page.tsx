@@ -12,7 +12,7 @@ import { formatPrice } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Offers",
   description:
-    "Everything currently reduced at EXTRA SHOP, plus the promo codes you can stack on top.",
+    "Everything currently reduced at ABEDIN SHOP, plus the promo codes you can stack on top.",
 };
 
 export default function OffersPage() {

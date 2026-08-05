@@ -129,7 +129,7 @@ export function ContactForm() {
               id="contact-order"
               value={orderRef}
               onChange={(e) => setOrderRef(e.target.value)}
-              placeholder="ES-123456"
+              placeholder="AS-123456"
             />
           </div>
         )}

@@ -17,7 +17,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "Answers on shipping, returns, authenticity, repairs, payment and security at EXTRA SHOP.",
+    "Answers on shipping, returns, authenticity, repairs, payment and security at ABEDIN SHOP.",
 };
 
 export default function FaqPage() {

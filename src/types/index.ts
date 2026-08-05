@@ -1,4 +1,4 @@
-/** Domain model for the EXTRA SHOP storefront. */
+/** Domain model for the ABEDIN SHOP storefront. */
 
 /** Merchandising flags that drive the curated landing pages. */
 export type ProductTag =

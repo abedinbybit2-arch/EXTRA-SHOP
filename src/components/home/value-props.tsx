@@ -8,7 +8,7 @@ export function ValueProps() {
   return (
     <section className="container-luxe py-20 lg:py-28">
       <SectionHeading
-        eyebrow="Why EXTRA SHOP"
+        eyebrow="Why ABEDIN SHOP"
         title="The part that happens after you buy"
         description="Anyone can photograph a product well. What separates a retailer is what happens once the parcel has left."
         align="center"

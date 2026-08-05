@@ -8,7 +8,7 @@ import { newArrivals } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "New arrivals",
   description:
-    "The most recent additions to the EXTRA SHOP catalogue, across all nine departments.",
+    "The most recent additions to the ABEDIN SHOP catalogue, across all nine departments.",
 };
 
 export default function NewArrivalsPage() {

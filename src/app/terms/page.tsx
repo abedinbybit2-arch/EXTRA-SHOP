@@ -5,7 +5,7 @@ import { LegalLayout, type LegalSection } from "@/components/legal/legal-layout"
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "The terms governing purchases, delivery, returns and warranty at EXTRA SHOP.",
+    "The terms governing purchases, delivery, returns and warranty at ABEDIN SHOP.",
 };
 
 const sections: LegalSection[] = [
@@ -13,7 +13,7 @@ const sections: LegalSection[] = [
     id: "these-terms",
     title: "About these terms",
     paragraphs: [
-      "These terms apply to every order placed through EXTRA SHOP. By completing a purchase you accept them. We may revise them from time to time; the version in force is the one published when your order was placed.",
+      "These terms apply to every order placed through ABEDIN SHOP. By completing a purchase you accept them. We may revise them from time to time; the version in force is the one published when your order was placed.",
     ],
   },
   {
@@ -69,7 +69,7 @@ const sections: LegalSection[] = [
     id: "intellectual-property",
     title: "Intellectual property",
     paragraphs: [
-      "All site content — text, photography, layout and the EXTRA SHOP name and marks — remains our property or that of our licensors. You may not reproduce it commercially without written permission.",
+      "All site content — text, photography, layout and the ABEDIN SHOP name and marks — remains our property or that of our licensors. You may not reproduce it commercially without written permission.",
     ],
   },
   {
@@ -86,7 +86,7 @@ export default function TermsPage() {
     <LegalLayout
       eyebrow="Legal"
       title="Terms & Conditions"
-      intro="The terms that govern buying from EXTRA SHOP — ordering, pricing, delivery, returns, warranty and liability."
+      intro="The terms that govern buying from ABEDIN SHOP — ordering, pricing, delivery, returns, warranty and liability."
       updated="5 February 2026"
       sections={sections}
     />

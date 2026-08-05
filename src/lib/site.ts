@@ -11,14 +11,14 @@ const siteUrl = (
 
 /** Single source of truth for brand copy, contact details and navigation. */
 export const siteConfig = {
-  name: "EXTRA SHOP",
+  name: "ABEDIN SHOP",
   tagline: "Objects of lasting desire",
   description:
-    "EXTRA SHOP is a curated destination for modern luxury — watches, fragrance, leather goods, eyewear, audio and fine jewellery from the world's most considered makers.",
+    "ABEDIN SHOP is a curated destination for modern luxury — watches, fragrance, leather goods, eyewear, audio and fine jewellery from the world's most considered makers.",
   url: siteUrl,
   locale: "en_US",
   contact: {
-    email: "concierge@extrashop.com",
+    email: "concierge@abedin.shop",
     phone: "+1 (212) 555-0139",
     address: "18 Mercer Street, SoHo, New York, NY 10013",
     hours: "Mon – Sat, 9:00 – 20:00 EST",

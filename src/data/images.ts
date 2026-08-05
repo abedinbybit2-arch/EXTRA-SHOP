@@ -3,7 +3,7 @@
  *
  * Every identifier below was verified to resolve and was reviewed visually so
  * products are never paired with mismatched imagery. Frames showing real-world
- * brand marks were deliberately excluded — EXTRA SHOP ships its own house
+ * brand marks were deliberately excluded — ABEDIN SHOP ships its own house
  * brands, so borrowed logos would undercut the identity.
  */
 

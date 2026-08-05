@@ -11,9 +11,9 @@ export function InstagramGallery() {
   return (
     <section className="container-luxe pb-20 lg:pb-28">
       <SectionHeading
-        eyebrow="@extrashop"
+        eyebrow="@abedinshop"
         title="From the community"
-        description="Tag your pieces with #ExtraShopFound to be featured here."
+        description="Tag your pieces with #AbedinShopFound to be featured here."
         align="center"
       />
 

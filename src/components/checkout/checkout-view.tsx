@@ -108,7 +108,7 @@ const EMPTY_FORM: FormState = {
  * outside the render path.
  */
 function makeOrderReference() {
-  return `ES-${Math.floor(100000 + Math.random() * 899999)}`;
+  return `AS-${Math.floor(100000 + Math.random() * 899999)}`;
 }
 
 /** Four-step checkout. Entirely UI — nothing is transmitted anywhere. */

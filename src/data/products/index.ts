@@ -10,7 +10,7 @@ import { jewelleryProducts } from "./jewellery";
 import { livingProducts } from "./living";
 import { watchProducts } from "./watches";
 
-/** The complete EXTRA SHOP catalogue, ordered by department. */
+/** The complete ABEDIN SHOP catalogue, ordered by department. */
 export const products: Product[] = [
   ...watchProducts,
   ...bagProducts,

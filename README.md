@@ -1,6 +1,6 @@
 <div align="center">
 
-# EXTRA SHOP
+# ABEDIN SHOP
 
 **Objects of lasting desire**
 
@@ -14,7 +14,7 @@ A premium, frontend-only e-commerce storefront built with Next.js 16, React 19, 
 
 ## Overview
 
-EXTRA SHOP is a complete luxury retail storefront — 20 routes, 62 products across nine departments, and twelve house brands. It is deliberately **frontend only**: there is no backend, no database, and no authentication. Cart, wishlist and browsing history persist in the browser's own `localStorage`, so the entire site deploys as a static export to any static host.
+ABEDIN SHOP is a complete luxury retail storefront — 20 routes, 62 products across nine departments, and twelve house brands. It is deliberately **frontend only**: there is no backend, no database, and no authentication. Cart, wishlist and browsing history persist in the browser's own `localStorage`, so the entire site deploys as a static export to any static host.
 
 The design brief was to avoid looking like a marketplace template. The result is an editorial, warm-ivory-and-ink palette with a single champagne-gold accent, a display serif for headings, and motion used sparingly enough to still register.
 
@@ -57,8 +57,8 @@ No component library is pulled in wholesale — Radix supplies only the accessib
 
 ```bash
 # 1. Clone
-git clone https://github.com/abedinbybit2-arch/EXTRA-SHOP.git
-cd EXTRA-SHOP
+git clone https://github.com/abedinbybit2-arch/ABEDIN-SHOP.git
+cd ABEDIN-SHOP
 
 # 2. Install
 npm install
@@ -81,22 +81,21 @@ Open <http://localhost:3000>.
 
 ### Building for a subpath
 
-GitHub Pages serves this project from `/EXTRA-SHOP`, so the base path is injected at build time:
+Production is served from the root of `abedin.shop`, so no base path is needed.
+If you host the export from a subdirectory instead, inject the prefix at build
+time:
 
 ```bash
-NEXT_PUBLIC_BASE_PATH=/EXTRA-SHOP npm run build
+NEXT_PUBLIC_BASE_PATH=/my-subdir npm run build
 ```
-
-Omit the variable to build for a domain root.
 
 ---
 
 ## Project structure
 
 ```
-extra-shop/
-├── .github/workflows/deploy.yml   # CI: lint, build, deploy to Pages
-├── public/                        # Static assets (+ .nojekyll for Pages)
+abedin-shop/
+├── public/                        # Static assets
 ├── next.config.ts                 # Static export, basePath, unoptimized images
 └── src/
     ├── app/                       # App Router: one folder per route

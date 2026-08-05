@@ -2,7 +2,7 @@ import type { Category } from "@/types";
 
 import { IMAGES, photoSquare } from "./images";
 
-/** The nine departments that make up the EXTRA SHOP floor plan. */
+/** The nine departments that make up the ABEDIN SHOP floor plan. */
 export const categories: Category[] = [
   {
     slug: "watches",

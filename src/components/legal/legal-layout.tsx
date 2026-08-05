@@ -83,7 +83,7 @@ export function LegalLayout({
             ))}
 
             <p className="rounded-2xl border border-border bg-secondary/50 p-6 text-xs leading-relaxed text-muted-foreground">
-              EXTRA SHOP is a frontend demonstration project. This document is
+              ABEDIN SHOP is a frontend demonstration project. This document is
               illustrative sample content written to exercise the page design —
               it is not legal advice and does not govern any real service.
             </p>

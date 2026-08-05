@@ -10,7 +10,7 @@ import { brandCounts } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "Brands",
   description:
-    "The twelve houses EXTRA SHOP works with directly — no distributors, no third parties.",
+    "The twelve houses ABEDIN SHOP works with directly — no distributors, no third parties.",
 };
 
 export default function BrandsPage() {

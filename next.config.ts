@@ -1,10 +1,9 @@
 import type { NextConfig } from "next";
 
 /**
- * EXTRA SHOP is a frontend-only storefront, so it ships as a fully static
- * export. On GitHub Pages the site is served from a project subpath
- * (`/EXTRA-SHOP`), which is injected at build time via NEXT_PUBLIC_BASE_PATH so
- * local development still runs from the root.
+ * ABEDIN SHOP is a frontend-only storefront, so it ships as a fully static
+ * export. Production is served from the root of abedin.shop; the base path is
+ * left configurable for hosts that serve the site from a subdirectory.
  */
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 

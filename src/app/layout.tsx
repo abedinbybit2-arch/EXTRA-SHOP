@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     "leather goods",
     "fine jewellery",
     "premium audio",
-    "EXTRA SHOP",
+    "ABEDIN SHOP",
   ],
   openGraph: {
     type: "website",

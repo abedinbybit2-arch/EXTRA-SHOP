@@ -8,7 +8,7 @@ import { bestSellers } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "Best sellers",
   description:
-    "The EXTRA SHOP pieces bought most often — ranked by lifetime units sold.",
+    "The ABEDIN SHOP pieces bought most often — ranked by lifetime units sold.",
 };
 
 export default function BestSellersPage() {

@@ -14,7 +14,7 @@ import { ProductSection } from "@/components/product/product-section";
 import { bestSellers, newArrivals, trending } from "@/lib/catalog";
 
 export const metadata: Metadata = {
-  title: "EXTRA SHOP — Objects of lasting desire",
+  title: "ABEDIN SHOP — Objects of lasting desire",
   description:
     "A curated destination for modern luxury: watches, leather goods, footwear, fine jewellery, audio, eyewear, apparel and fragrance from twelve houses we work with directly.",
 };

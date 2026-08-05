@@ -7,7 +7,7 @@ import { ProductGridSkeleton } from "@/components/ui/skeleton";
 
 export const metadata: Metadata = {
   title: "Search",
-  description: "Search the EXTRA SHOP catalogue by product, house or department.",
+  description: "Search the ABEDIN SHOP catalogue by product, house or department.",
   // Search result pages carry no standalone value for crawlers.
   robots: { index: false, follow: true },
 };

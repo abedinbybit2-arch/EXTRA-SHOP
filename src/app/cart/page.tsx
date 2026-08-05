@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/common/page-header";
 
 export const metadata: Metadata = {
   title: "Shopping bag",
-  description: "Review the pieces in your EXTRA SHOP bag before checkout.",
+  description: "Review the pieces in your ABEDIN SHOP bag before checkout.",
   robots: { index: false, follow: true },
 };
 

@@ -5,7 +5,7 @@ import { LegalLayout, type LegalSection } from "@/components/legal/legal-layout"
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How EXTRA SHOP collects, uses, stores and protects personal information.",
+    "How ABEDIN SHOP collects, uses, stores and protects personal information.",
 };
 
 const sections: LegalSection[] = [
@@ -67,7 +67,7 @@ const sections: LegalSection[] = [
     id: "contact",
     title: "Contacting us",
     paragraphs: [
-      "Privacy questions and rights requests can be sent to concierge@extrashop.com, or by post to 18 Mercer Street, SoHo, New York, NY 10013. We aim to reply within two working days.",
+      "Privacy questions and rights requests can be sent to concierge@abedin.shop, or by post to 18 Mercer Street, SoHo, New York, NY 10013. We aim to reply within two working days.",
     ],
   },
 ];

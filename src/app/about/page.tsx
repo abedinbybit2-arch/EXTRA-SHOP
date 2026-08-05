@@ -15,7 +15,7 @@ import { products } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "EXTRA SHOP is a curated luxury retailer working directly with twelve houses across nine departments.",
+    "ABEDIN SHOP is a curated luxury retailer working directly with twelve houses across nine departments.",
 };
 
 export default function AboutPage() {
@@ -31,7 +31,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="Since 2016"
         title="A deliberately small catalogue"
-        description="EXTRA SHOP exists because buying well is hard. We would rather stock sixty pieces we can defend than six thousand we cannot."
+        description="ABEDIN SHOP exists because buying well is hard. We would rather stock sixty pieces we can defend than six thousand we cannot."
         image={photoWide(IMAGES.living[3])}
         crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
       />

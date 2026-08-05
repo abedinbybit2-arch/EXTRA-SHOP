@@ -5,7 +5,7 @@ import { WishlistView } from "@/components/wishlist/wishlist-view";
 
 export const metadata: Metadata = {
   title: "Wishlist",
-  description: "The pieces you've saved from the EXTRA SHOP catalogue.",
+  description: "The pieces you've saved from the ABEDIN SHOP catalogue.",
   robots: { index: false, follow: true },
 };
 

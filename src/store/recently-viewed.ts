@@ -30,7 +30,7 @@ export const useRecentlyViewed = create<RecentlyViewedState>()(
       clear: () => set({ slugs: [] }),
     }),
     {
-      name: "extra-shop-recently-viewed",
+      name: "abedin-shop-recently-viewed",
       partialize: (state) => ({ slugs: state.slugs }),
       onRehydrateStorage: () => () => {
         useRecentlyViewed.setState({ hydrated: true });

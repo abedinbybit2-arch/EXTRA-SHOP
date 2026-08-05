@@ -1,7 +1,7 @@
 import type { Brand } from "@/types";
 
 /**
- * EXTRA SHOP house brands. These are fictional makers invented for the
+ * ABEDIN SHOP house brands. These are fictional makers invented for the
  * storefront so the catalogue reads as an original retailer rather than a
  * reseller of existing labels.
  */

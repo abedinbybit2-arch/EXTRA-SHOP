@@ -5,7 +5,7 @@ import { CheckoutView } from "@/components/checkout/checkout-view";
 export const metadata: Metadata = {
   title: "Checkout",
   description:
-    "Complete your EXTRA SHOP order — shipping, delivery and payment. Frontend demonstration only.",
+    "Complete your ABEDIN SHOP order — shipping, delivery and payment. Frontend demonstration only.",
   robots: { index: false, follow: false },
 };
 

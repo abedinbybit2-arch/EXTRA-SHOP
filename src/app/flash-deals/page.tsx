@@ -10,7 +10,7 @@ import { flashDeals } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "Flash deals",
   description:
-    "A 48-hour flash event across the EXTRA SHOP floor — deepest reductions first.",
+    "A 48-hour flash event across the ABEDIN SHOP floor — deepest reductions first.",
 };
 
 export default function FlashDealsPage() {

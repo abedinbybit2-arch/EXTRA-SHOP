@@ -10,7 +10,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Reach the EXTRA SHOP concierge team by email, phone or message — replies within a few hours.",
+    "Reach the ABEDIN SHOP concierge team by email, phone or message — replies within a few hours.",
 };
 
 const DETAILS = [
@@ -44,7 +44,7 @@ export default function ContactPage() {
               <div className="relative aspect-4/3">
                 <Image
                   src={photoWide(IMAGES.living[0], 800, 600)}
-                  alt="The EXTRA SHOP showroom in SoHo, New York"
+                  alt="The ABEDIN SHOP showroom in SoHo, New York"
                   fill
                   sizes="380px"
                   className="object-cover"

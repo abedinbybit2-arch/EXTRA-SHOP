@@ -9,7 +9,7 @@ import { products } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "Shop all",
   description:
-    "Browse the complete EXTRA SHOP catalogue — watches, leather goods, footwear, fine jewellery, audio, eyewear, apparel, fragrance and home.",
+    "Browse the complete ABEDIN SHOP catalogue — watches, leather goods, footwear, fine jewellery, audio, eyewear, apparel, fragrance and home.",
 };
 
 export default function ShopPage() {

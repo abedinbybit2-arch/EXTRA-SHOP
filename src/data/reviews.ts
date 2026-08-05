@@ -99,7 +99,7 @@ export const testimonials = [
   {
     id: "t1",
     quote:
-      "I have bought from EXTRA SHOP four times now and the packaging alone makes it feel like an occasion. The concierge team answered a sizing question at 11pm on a Sunday.",
+      "I have bought from ABEDIN SHOP four times now and the packaging alone makes it feel like an occasion. The concierge team answered a sizing question at 11pm on a Sunday.",
     author: "Elena Marchetti",
     role: "Architect, Milan",
     rating: 5,
