@@ -109,7 +109,7 @@ export function PurchasePanel({ product }: { product: Product }) {
         className="mt-6"
       />
       <p className="mt-1.5 text-xs text-muted-foreground">
-        Duties included · Instalments available at checkout
+        Duties included · Cash on delivery
       </p>
 
       <p className="mt-6 text-sm leading-relaxed text-muted-foreground">

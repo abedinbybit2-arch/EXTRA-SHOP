@@ -3,14 +3,12 @@
 import {
   ArrowLeft,
   ArrowRight,
+  Banknote,
   Building2,
   Check,
-  CreditCard,
   Lock,
-  ShieldAlert,
   ShoppingBag,
   Truck,
-  Wallet,
   Zap,
 } from "lucide-react";
 import Link from "next/link";
@@ -68,11 +66,11 @@ const DELIVERY_OPTIONS = [
   },
 ];
 
-const PAYMENT_OPTIONS = [
-  { id: "card", icon: CreditCard, label: "Credit or debit card", body: "All major cards accepted" },
-  { id: "wallet", icon: Wallet, label: "Digital wallet", body: "Authorise with Face ID or fingerprint" },
-  { id: "transfer", icon: Building2, label: "Bank transfer", body: "For orders above $5,000" },
-];
+/**
+ * Cash on delivery is the only payment method. No card, wallet or online
+ * payment details are collected anywhere in this flow.
+ */
+const PAYMENT_LABEL = "Cash on delivery";
 
 interface FormState {
   email: string;
@@ -84,10 +82,6 @@ interface FormState {
   postcode: string;
   country: string;
   phone: string;
-  cardName: string;
-  cardNumber: string;
-  cardExpiry: string;
-  cardCvc: string;
 }
 
 const EMPTY_FORM: FormState = {
@@ -100,10 +94,6 @@ const EMPTY_FORM: FormState = {
   postcode: "",
   country: "United States",
   phone: "",
-  cardName: "",
-  cardNumber: "",
-  cardExpiry: "",
-  cardCvc: "",
 };
 
 /**
@@ -127,7 +117,6 @@ export function CheckoutView() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [delivery, setDelivery] = useState("express");
-  const [payment, setPayment] = useState("card");
   const [order, setOrder] = useState<ConfirmedOrder | null>(null);
 
   if (order) return <OrderConfirmation order={order} />;
@@ -185,22 +174,9 @@ export function CheckoutView() {
     return Object.keys(next).length === 0;
   };
 
-  const validatePayment = () => {
-    if (payment !== "card") return true;
-    const next: Partial<Record<keyof FormState, string>> = {};
-    if (!form.cardName.trim()) next.cardName = "Required";
-    if (form.cardNumber.replace(/\s/g, "").length < 15)
-      next.cardNumber = "Enter a valid card number";
-    if (!/^\d{2}\s?\/\s?\d{2}$/.test(form.cardExpiry))
-      next.cardExpiry = "Use MM/YY";
-    if (form.cardCvc.length < 3) next.cardCvc = "3–4 digits";
-    setErrors(next);
-    return Object.keys(next).length === 0;
-  };
-
   const next = () => {
     if (step === 0 && !validateShipping()) return;
-    if (step === 2 && !validatePayment()) return;
+    // Cash on delivery collects nothing, so the payment step needs no checks.
     setStep((s) => Math.min(s + 1, STEPS.length - 1));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -221,10 +197,7 @@ export function CheckoutView() {
     ]
       .filter(Boolean)
       .join(", ");
-    const paymentLabel =
-      payment === "card"
-        ? `Card ending ${form.cardNumber.replace(/\s/g, "").slice(-4) || "••••"}`
-        : (PAYMENT_OPTIONS.find((o) => o.id === payment)?.label ?? "Card");
+    const paymentLabel = PAYMENT_LABEL;
 
     setOrder({
       reference,
@@ -438,108 +411,31 @@ export function CheckoutView() {
           {step === 2 && (
             <section>
               <h2 className="font-display text-2xl font-light">Payment method</h2>
-              <RadioGroup value={payment} onValueChange={setPayment} className="mt-7">
-                {PAYMENT_OPTIONS.map((option) => (
-                  <RadioCard key={option.id} value={option.id} id={`payment-${option.id}`}>
-                    <div className="flex gap-3">
-                      <option.icon className="mt-0.5 size-4 shrink-0 text-accent" />
-                      <div>
-                        <p className="text-sm font-medium">{option.label}</p>
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          {option.body}
-                        </p>
-                      </div>
-                    </div>
-                  </RadioCard>
-                ))}
-              </RadioGroup>
 
-              {payment === "card" && (
-                <div className="mt-7 grid gap-5 rounded-2xl border border-border bg-card p-6 sm:grid-cols-2">
-                  {/*
-                    These inputs are a mock-up of a payment step, not a payment
-                    form. They deliberately carry no `cc-*` autocomplete hints:
-                    those are the machine-readable signal that a form harvests
-                    card data, and on a demo storefront they read as phishing to
-                    browser safe-browsing heuristics. Nothing here is submitted
-                    or stored anywhere.
-                  */}
-                  <p
-                    role="note"
-                    className="flex items-start gap-3 rounded-xl border border-warning/40 bg-warning/10 p-4 text-xs leading-relaxed text-foreground sm:col-span-2"
-                  >
-                    <ShieldAlert className="mt-0.5 size-4 shrink-0 text-warning" />
-                    <span>
-                      <strong className="font-medium">
-                        This is a demonstration, not a real checkout.
-                      </strong>{" "}
-                      No payment is taken and nothing you type is sent anywhere.
-                      Please do not enter real card details — use the sample
-                      values shown below.
-                    </span>
-                  </p>
-
-                  <Field
-                    className="sm:col-span-2"
-                    id="cardName"
-                    label="Name on card (sample data only)"
-                    value={form.cardName}
-                    onChange={(v) => set("cardName", v)}
-                    error={errors.cardName}
-                    placeholder="Test User"
-                    autoComplete="off"
-                  />
-                  <Field
-                    className="sm:col-span-2"
-                    id="cardNumber"
-                    label="Card number (sample data only)"
-                    value={form.cardNumber}
-                    // Group digits into blocks of four as the user types.
-                    onChange={(v) =>
-                      set(
-                        "cardNumber",
-                        v
-                          .replace(/\D/g, "")
-                          .slice(0, 16)
-                          .replace(/(.{4})/g, "$1 ")
-                          .trim(),
-                      )
-                    }
-                    error={errors.cardNumber}
-                    placeholder="0000 0000 0000 0000"
-                    inputMode="numeric"
-                    autoComplete="off"
-                  />
-                  <Field
-                    id="cardExpiry"
-                    label="Expiry"
-                    value={form.cardExpiry}
-                    onChange={(v) => {
-                      const digits = v.replace(/\D/g, "").slice(0, 4);
-                      set(
-                        "cardExpiry",
-                        digits.length > 2
-                          ? `${digits.slice(0, 2)}/${digits.slice(2)}`
-                          : digits,
-                      );
-                    }}
-                    error={errors.cardExpiry}
-                    placeholder="MM/YY"
-                    inputMode="numeric"
-                    autoComplete="off"
-                  />
-                  <Field
-                    id="cardCvc"
-                    label="Security code"
-                    value={form.cardCvc}
-                    onChange={(v) => set("cardCvc", v.replace(/\D/g, "").slice(0, 4))}
-                    error={errors.cardCvc}
-                    placeholder="000"
-                    inputMode="numeric"
-                    autoComplete="off"
-                  />
+              {/*
+                Cash on delivery only. No card, wallet or online payment
+                details are collected anywhere in this flow, so there is no
+                payment form to render.
+              */}
+              <div className="mt-7 rounded-2xl border border-accent/40 bg-accent/5 p-6">
+                <div className="flex gap-4">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-full bg-accent/12 text-accent">
+                    <Banknote className="size-5" strokeWidth={1.6} />
+                  </span>
+                  <div>
+                    <p className="text-sm font-medium">{PAYMENT_LABEL}</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                      Pay the courier in cash when your order arrives. Nothing is
+                      charged now, and no card or account details are required.
+                    </p>
+                  </div>
                 </div>
-              )}
+
+                <p className="mt-5 flex items-center gap-2 border-t border-accent/20 pt-4 text-xs text-muted-foreground">
+                  <Lock className="size-3.5 text-accent" />
+                  Have the order total ready for the courier.
+                </p>
+              </div>
             </section>
           )}
 
@@ -563,11 +459,7 @@ export function CheckoutView() {
                 <ReviewRow
                   title="Payment"
                   onEdit={() => setStep(2)}
-                  body={
-                    payment === "card"
-                      ? `Card ending ${form.cardNumber.replace(/\s/g, "").slice(-4) || "••••"}`
-                      : (PAYMENT_OPTIONS.find((o) => o.id === payment)?.label ?? "")
-                  }
+                  body={`${PAYMENT_LABEL} — pay the courier on arrival`}
                 />
               </div>
 

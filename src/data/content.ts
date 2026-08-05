@@ -166,11 +166,11 @@ export const faqs = [
     items: [
       {
         q: "What payment methods do you accept?",
-        a: "All major credit and debit cards, digital wallets, and bank transfer for orders above $5,000. Instalment plans over three, six or twelve months are available at checkout with no interest.",
+        a: "Cash on delivery only. You pay the courier in cash when the order reaches you — nothing is charged when you place the order, and we never ask for card or account details.",
       },
       {
         q: "Is my payment information secure?",
-        a: "Card details are tokenised by our payment processor and never touch our servers. The entire site is served over TLS 1.3 and we are PCI DSS Level 1 compliant.",
+        a: "There is no payment information to secure — we take no card or account details at any point, because every order is paid in cash on delivery. The site itself is served entirely over TLS 1.3.",
       },
       {
         q: "Can I pay in my local currency?",

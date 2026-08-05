@@ -13,7 +13,7 @@ const sections: LegalSection[] = [
     id: "information-we-collect",
     title: "Information we collect",
     paragraphs: [
-      "We collect only what is needed to fulfil an order and improve the storefront: your name, delivery and billing address, email address, telephone number and order history. Payment card details are tokenised by our payment processor and never reach our servers.",
+      "We collect only what is needed to fulfil an order and improve the storefront: your name, delivery address, email address, telephone number and order history. We never collect payment card or bank details, because every order is paid in cash on delivery.",
       "We also record standard technical information — browser type, device category, referring page and approximate region derived from your IP address — to diagnose faults and understand which parts of the catalogue are useful.",
     ],
   },
@@ -37,7 +37,7 @@ const sections: LegalSection[] = [
     id: "sharing",
     title: "Who we share data with",
     paragraphs: [
-      "We share the minimum necessary data with our payment processor, our shipping carriers, and the atelier handling a repair. Each is bound by contract to use that data only for the service they provide to us.",
+      "We share the minimum necessary data with our shipping carriers and the atelier handling a repair. Each is bound by contract to use that data only for the service they provide to us. There is no payment processor involved, since orders are settled in cash on delivery.",
       "We will disclose information where legally compelled to do so, and will tell you when we are permitted to.",
     ],
   },
@@ -60,7 +60,7 @@ const sections: LegalSection[] = [
     id: "security",
     title: "Security",
     paragraphs: [
-      "The entire site is served over TLS 1.3. Access to customer records is restricted to staff who need it, protected by hardware-key two-factor authentication, and logged. We are PCI DSS Level 1 compliant through our payment processor.",
+      "The entire site is served over TLS 1.3. Access to customer records is restricted to staff who need it, protected by hardware-key two-factor authentication, and logged. No card or bank data is held anywhere, because none is ever collected.",
     ],
   },
   {
