@@ -144,15 +144,21 @@ extra-shop/
 
 ## Deployment
 
-The same source deploys to two hosts, which differ only in configuration:
+The site is served from a **single canonical origin**, [abedin.shop](https://abedin.shop/),
+hosted on Vercel. Deploy with:
 
-| | Vercel — production | GitHub Pages — mirror |
-|---|---|---|
-| URL | **[abedin.shop](https://abedin.shop/)** | [abedinbybit2-arch.github.io/EXTRA-SHOP](https://abedinbybit2-arch.github.io/EXTRA-SHOP/) |
-| Served from | domain root | project subpath |
-| `NEXT_PUBLIC_BASE_PATH` | *(unset)* | `/EXTRA-SHOP` |
-| `NEXT_PUBLIC_SITE_URL` | `https://abedin.shop` | the Pages URL |
-| Trigger | `vercel --prod` | `.github/workflows/deploy.yml` on push to `main` |
+```bash
+vercel --prod
+```
+
+Vercel's generated `*.vercel.app` deployment URLs are deliberately not public:
+the project uses Deployment Protection (`all_except_custom_domains`), so those
+URLs require authentication while the custom domain stays open. This keeps one
+indexable copy of the site and avoids duplicate content.
+
+> A GitHub Pages mirror previously ran from `.github/workflows/deploy.yml`. It
+> was retired in favour of the custom domain; the workflow remains in git
+> history if it is ever needed again.
 
 ### Custom domain
 
@@ -173,7 +179,7 @@ automatically by Vercel through Let's Encrypt.
 | Variable | Purpose |
 |---|---|
 | `NEXT_PUBLIC_BASE_PATH` | Path prefix when served from a subdirectory. Leave unset for a domain root. |
-| `NEXT_PUBLIC_SITE_URL` | Canonical origin for `metadataBase`, Open Graph tags, `sitemap.xml` and `robots.txt`. Defaults to the GitHub Pages URL. |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin for `metadataBase`, Open Graph tags, `sitemap.xml` and `robots.txt`. Set to `https://abedin.shop` in production. |
 
 Both are read at **build time**, so changing either requires a rebuild.
 

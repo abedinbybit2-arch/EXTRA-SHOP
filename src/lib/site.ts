@@ -1,13 +1,12 @@
 /**
  * Canonical origin for metadata, Open Graph tags, sitemap and robots.
  *
- * The same build is deployed to more than one host, so this is injected rather
- * than hardcoded — otherwise canonical URLs on one deployment point at the
- * other. Falls back to the GitHub Pages URL, which is the default target.
+ * Injected at build time rather than hardcoded, so a local or self-hosted build
+ * does not advertise the production hostname. Falls back to the live domain,
+ * which is the only public origin.
  */
 const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://abedinbybit2-arch.github.io/EXTRA-SHOP"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://abedin.shop"
 ).replace(/\/+$/, "");
 
 /** Single source of truth for brand copy, contact details and navigation. */
