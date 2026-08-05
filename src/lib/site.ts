@@ -64,8 +64,13 @@ export const footerNav = [
   },
 ] as const;
 
-/** Rotating announcements in the top utility bar. */
+/**
+ * Rotating announcements in the top utility bar. The demo disclosure leads the
+ * rotation — this is a portfolio storefront, and it should never be mistaken
+ * for a real shop that takes payments.
+ */
 export const announcements = [
+  "Demo store — a frontend portfolio project. No real orders or payments.",
   "Complimentary express shipping on orders over $250",
   "Extended 60-day returns on every full-price order",
   "New season: Winter Atelier has landed",

@@ -7,6 +7,7 @@ import {
   Check,
   CreditCard,
   Lock,
+  ShieldAlert,
   ShoppingBag,
   Truck,
   Wallet,
@@ -405,19 +406,43 @@ export function CheckoutView() {
 
               {payment === "card" && (
                 <div className="mt-7 grid gap-5 rounded-2xl border border-border bg-card p-6 sm:grid-cols-2">
+                  {/*
+                    These inputs are a mock-up of a payment step, not a payment
+                    form. They deliberately carry no `cc-*` autocomplete hints:
+                    those are the machine-readable signal that a form harvests
+                    card data, and on a demo storefront they read as phishing to
+                    browser safe-browsing heuristics. Nothing here is submitted
+                    or stored anywhere.
+                  */}
+                  <p
+                    role="note"
+                    className="flex items-start gap-3 rounded-xl border border-warning/40 bg-warning/10 p-4 text-xs leading-relaxed text-foreground sm:col-span-2"
+                  >
+                    <ShieldAlert className="mt-0.5 size-4 shrink-0 text-warning" />
+                    <span>
+                      <strong className="font-medium">
+                        This is a demonstration, not a real checkout.
+                      </strong>{" "}
+                      No payment is taken and nothing you type is sent anywhere.
+                      Please do not enter real card details — use the sample
+                      values shown below.
+                    </span>
+                  </p>
+
                   <Field
                     className="sm:col-span-2"
                     id="cardName"
-                    label="Name on card"
+                    label="Name on card (sample data only)"
                     value={form.cardName}
                     onChange={(v) => set("cardName", v)}
                     error={errors.cardName}
-                    autoComplete="cc-name"
+                    placeholder="Test User"
+                    autoComplete="off"
                   />
                   <Field
                     className="sm:col-span-2"
                     id="cardNumber"
-                    label="Card number"
+                    label="Card number (sample data only)"
                     value={form.cardNumber}
                     // Group digits into blocks of four as the user types.
                     onChange={(v) =>
@@ -431,9 +456,9 @@ export function CheckoutView() {
                       )
                     }
                     error={errors.cardNumber}
-                    placeholder="4242 4242 4242 4242"
+                    placeholder="0000 0000 0000 0000"
                     inputMode="numeric"
-                    autoComplete="cc-number"
+                    autoComplete="off"
                   />
                   <Field
                     id="cardExpiry"
@@ -451,22 +476,18 @@ export function CheckoutView() {
                     error={errors.cardExpiry}
                     placeholder="MM/YY"
                     inputMode="numeric"
-                    autoComplete="cc-exp"
+                    autoComplete="off"
                   />
                   <Field
                     id="cardCvc"
-                    label="CVC"
+                    label="Security code"
                     value={form.cardCvc}
                     onChange={(v) => set("cardCvc", v.replace(/\D/g, "").slice(0, 4))}
                     error={errors.cardCvc}
-                    placeholder="123"
+                    placeholder="000"
                     inputMode="numeric"
-                    autoComplete="cc-csc"
+                    autoComplete="off"
                   />
-                  <p className="flex items-center gap-2 text-xs text-muted-foreground sm:col-span-2">
-                    <Lock className="size-3.5 text-accent" />
-                    Demonstration only — do not enter real card details.
-                  </p>
                 </div>
               )}
             </section>
