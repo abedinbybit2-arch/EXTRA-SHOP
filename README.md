@@ -6,7 +6,7 @@
 
 A premium, frontend-only e-commerce storefront built with Next.js 16, React 19, TypeScript and Tailwind CSS v4.
 
-[**View the live site →**](https://abedinbybit2-arch.github.io/EXTRA-SHOP/)
+[**Live on Vercel →**](https://extra-shop-omega.vercel.app/) &nbsp;·&nbsp; [**Live on GitHub Pages →**](https://abedinbybit2-arch.github.io/EXTRA-SHOP/)
 
 </div>
 
@@ -144,9 +144,26 @@ extra-shop/
 
 ## Deployment
 
-Pushes to `main` trigger `.github/workflows/deploy.yml`, which lints, builds the static export with the correct base path, and publishes to GitHub Pages.
+The same source deploys to two hosts, which differ only in configuration:
 
-To deploy elsewhere, run `npm run build` and serve the resulting `out/` directory from any static host (Netlify, Cloudflare Pages, S3, nginx). For a root domain, build without `NEXT_PUBLIC_BASE_PATH`.
+| | GitHub Pages | Vercel |
+|---|---|---|
+| URL | [abedinbybit2-arch.github.io/EXTRA-SHOP](https://abedinbybit2-arch.github.io/EXTRA-SHOP/) | [extra-shop-omega.vercel.app](https://extra-shop-omega.vercel.app/) |
+| Served from | project subpath | domain root |
+| `NEXT_PUBLIC_BASE_PATH` | `/EXTRA-SHOP` | *(unset)* |
+| `NEXT_PUBLIC_SITE_URL` | the Pages URL | the Vercel URL |
+| Trigger | `.github/workflows/deploy.yml` on push to `main` | `vercel --prod` |
+
+### Environment variables
+
+| Variable | Purpose |
+|---|---|
+| `NEXT_PUBLIC_BASE_PATH` | Path prefix when served from a subdirectory. Leave unset for a domain root. |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin for `metadataBase`, Open Graph tags, `sitemap.xml` and `robots.txt`. Defaults to the GitHub Pages URL. |
+
+Both are read at **build time**, so changing either requires a rebuild.
+
+To deploy anywhere else, run `npm run build` and serve the resulting `out/` directory from any static host (Netlify, Cloudflare Pages, S3, nginx).
 
 ---
 
